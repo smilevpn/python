@@ -1,9 +1,4 @@
-a = 10
-b = 5
-if a > b:
-	print("A больше B")
-	print(a - b)
-else:
-	print("B больше или равно A")
-	print(b - a)
-print("Конец")
+import sys
+nat = "ip nat inside source list ACL interface FastEthernet0/1 overload"
+res = nat.replace('FastEthernet0/1', 'GigabitEthernet')
+print(res)
