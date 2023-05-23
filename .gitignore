@@ -35,4 +35,4 @@ Thumbs.db
 .vscode/
 
 # Virual environments
-py311/
+py38/
