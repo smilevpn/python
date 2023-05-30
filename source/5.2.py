@@ -1,8 +1,9 @@
+from network_masks import dict_mask
 import re
+
 #докидывает в строку пробелы до 10 символов
 def quantiti_symbols(value):
     return value + ((10 - len(value)) * ' ')
-
 #разделяет ip и маску
 def separation_ip(ip_and_mask):
     return (ip_and_mask.split('/'))[0]
@@ -23,7 +24,7 @@ def out_ip(ip):
 
 #формирует обработанный вывод маски
 def out_mask(mask):
-    octets = '255.255.255.0'.split('.')
+    octets = dict_mask[mask].split('.')
     res_oct, res_bin = '', ''
     i = 0
     while i < len(octets):
@@ -33,14 +34,16 @@ def out_mask(mask):
         i += 1
     return ('/' + mask + '\n' + res_oct + '\n' + res_bin)
 
+#считываем ввод пользователя
 print(40 * '-' + '\n' + 'Введите ip-адрес по маске x.x.x.x/xx: ')
 ip_and_mask = input()
-for val in ip_and_mask:
-    if re.match(r'([0-9]{3}|[0-9]{2}|[0-9]{1})\.([0-9]{3}|[0-9]{2}|[0-9]{1})\.([0-9]{3}|[0-9]{2}|[0-9]{1})\.([0-9]{3}|[0-9]{2}|[0-9]{1})\/([0-9]{2}|[0-9]{1})', val) == True:
-        print('yes')
-    else:
-        print('Неверное значение')
-        quit()
+
+#проверяем введенное значение по маске
+#первый вариант if re.match(r'([0-9]{3}|[0-9]{2}|[0-9]{1})\.([0-9]{3}|[0-9]{2}|[0-9]{1})\.([0-9]{3}|[0-9]{2}|[0-9]{1})\.([0-9]{3}|[0-9]{2}|[0-9]{1})\/([0-9]{2}|[0-9]{2})', ip_and_mask) == None:
+#второй вариант if re.match(r'\d{,3}\.\d{,3}\.\d{,3}\.\d{,3}\/\d{,2}', ip_and_mask) == None:
+if re.match(r'\d{,3}\.\d{,3}\.\d{,3}\.\d{,3}\/\d{,2}', ip_and_mask) == None:
+    print('Неверное значение')
+    quit()
 ip = separation_ip(ip_and_mask)
 mask = separation_mask(ip_and_mask)
 
