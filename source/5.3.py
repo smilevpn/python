@@ -1,8 +1,20 @@
-access_template = {
-    "switchport mode access",
-    "switchport access vlan {vlans}",
-    "switchport nonegotiate",
-    
+# def sum_interfaces():
+#     sum_int = ''
+#     for key in dict.keys():
+#         sum_int += key + ' '
+#     return sum_int[:-1]
+
+dict = {
+'access':
+    "switchport mode access\n"
+    "switchport access vlan {vlans}\n"
+    "switchport nonegotiate\n"
+    "spanning-three portfast\n"
+    "spanning-three bpduguard enable\n",
+'trunk':
+    "switchport trunk encapsulation dot1q\n"
+    "switchport mode trunk\n"
+    "switchport trunk allowed vlan {vlans}\n"
 }
 
 
@@ -14,14 +26,4 @@ print('Введите номер влан(ов): ')
 vlans = input()
 
 print('interface ' + interface + '\n')
-switchport mode access
-switchport access vlan 3
-switchport nonegotiate
-spanning-tree portfast
-spanning-tree bpduguard enable
-
-
-interface Fa0/7
-switchport trunk encapsulation dot1q
-switchport mode trunk
-switchport trunk allowed vlan 2,3,4,5
+print(dict[mode])
